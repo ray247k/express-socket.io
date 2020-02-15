@@ -16,13 +16,13 @@ io.on('connection', function (socket) {
         online_user_count -= 1
         socket.broadcast.emit('user exit', '有個使用者離開了聊天室，我們懷念他')
         io.emit('online user count', online_user_count)
-    });
+    })
 
     socket.on('chat message', function (msg) {
         socket.broadcast.emit('chat message', msg)
-    });
-});
+    })
+})
 
 http.listen(3000, function () {
     console.log('express service on, listening on :3000')
-});
+})

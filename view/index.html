@@ -67,7 +67,18 @@
             var socket = io()
             $('form').submit(function (e) {
                 e.preventDefault()
-                msg = $('#m').val()
+                let msg = $('#m').val()
+
+                let timestamp = new Date()
+                let Y = timestamp.getFullYear() + '-';
+                let M = (timestamp.getMonth()+1 < 10 ? '0'+(timestamp.getMonth()+1) : timestamp.getMonth()+1) + '-'
+                let D = (timestamp.getDate() < 10 ? '0' + (timestamp.getDate()) : timestamp.getDate()) + ' '
+                let h = (timestamp.getHours() < 10 ? '0' + timestamp.getHours() : timestamp.getHours()) + ':'
+                let m = (timestamp.getMinutes() <10 ? '0' + timestamp.getMinutes() : timestamp.getMinutes()) + ':'
+                let s = (timestamp.getSeconds() <10 ? '0' + timestamp.getSeconds() : timestamp.getSeconds())
+                let date = Y + M + D + h + m + s
+                
+                msg = date + ' | ' + msg
                 socket.emit('chat message', msg)
                 $('#messages').append($('<li>').text(msg))
                 $('#m').val('')
