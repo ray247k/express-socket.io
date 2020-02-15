@@ -53,7 +53,7 @@
 </head>
 
 <body>
-    <div style="right: 0px; position:fixed;">現在人數：<span id="user_count"></span></div>
+    <div style="right: 5px; position:fixed;">現在人數：<span id="online_user_count"></span></div>
     <ul id="messages"></ul>
     <p id="announcement" style="display: none; position: absolute; bottom: 50px; left: 5px;"></p>
     <form action="">
@@ -85,6 +85,11 @@
                 $('#announcement').text(msg).fadeIn(1500)
                 $('#announcement').fadeOut(1500)
             });
+
+            // 使用者人數變動
+            socket.on('online user count', function (user_count) {
+                $('#online_user_count').text(user_count).fadeIn(500)
+            })
 
             socket.on('chat message', function (msg) {
                 console.log(msg)
